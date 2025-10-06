@@ -1,1 +1,214 @@
+#Part A
+hintsdata<-HINTSData_2020_clean #renaming the data to something more simple
+summary(hintsdata)
+hintsdata
+neededvariables<-c("HHID", "PersonID", "QualityCare", "Age", "BirthGender", "smokeStat", "RaceEthn5", "AvgDrinksPerWeek", "WeeklyMinutesModerateExercise", "BMI")#selecting the variablew needed for analysis
+hintsdataclean<-hintsdata[neededvariables]#putting the needed variables into their own subset
+#Part B
+summary(hintsdataclean)
+#continuous variables in the dataset: age, AvgDrinks, exercise, & BMI
+attach(hintsdataclean)
+mean(Age) # Provides the mean of the data
+sd(Age) # Provides the standard deviation of the data
+var(Age)#Provides variance of the variable
+min(Age)
+median(Age)
+quantile(Age)
+max(Age)
+
+mean(AvgDrinksPerWeek)
+sd(AvgDrinksPerWeek)
+var(AvgDrinksPerWeek)
+min(AvgDrinksPerWeek)
+max(AvgDrinksPerWeek)
+median(AvgDrinksPerWeek)
+quantile(AvgDrinksPerWeek)
+
+mean(WeeklyMinutesModerateExercise)
+sd(WeeklyMinutesModerateExercise)
+var(WeeklyMinutesModerateExercise)
+min(WeeklyMinutesModerateExercise)
+max(WeeklyMinutesModerateExercise)
+median(WeeklyMinutesModerateExercise)
+quantile(WeeklyMinutesModerateExercise)
+
+mean(BMI)
+sd(BMI)
+var(BMI)
+min(BMI)
+max(BMI)
+median(BMI)
+quantile(BMI)
+#B.2, Dyplr
+library(dplyr)
+help(dplyr)
+summary(Age)#gives all components of the 5 number summary(min, max, median, mean, and 1st quartile)
+summary(AvgDrinksPerWeek)
+summary(WeeklyMinutesModerateExercise)
+summary(BMI)
+#using group_by from dyplr allows me to include what is not in the summary function for each cont. variable, while stratifying by smoking
+summary_continuous_Age<-hintsdataclean %>%
+  group_by(smokeStat) %>%
+  summarize(
+    min_Age = min(Age),
+    max_Age = max(Age),
+    Median = median(Age),
+    Q1_Age = quantile(Age, 0.25),
+    Q3_Age = quantile(Age, 0.75),
+    mean_Age = mean(Age),
+    sd_Age = sd(Age),
+    var_Age = var(Age)
+  )
+print(summary_continuous_Age)
+
+summary_continuous_AvgDrinksPerWeek<-hintsdataclean %>%
+  group_by(smokeStat) %>%
+  summarize(
+    min_Drinks = min(AvgDrinksPerWeek),
+    max_Drinks = max(AvgDrinksPerWeek),
+    Median_Drinks = median(AvgDrinksPerWeek),
+    Q1_Drinks = quantile(AvgDrinksPerWeek, 0.25),
+    Q3_Drinks = quantile(AvgDrinksPerWeek, 0.75),
+    mean_Drinks = mean(AvgDrinksPerWeek),
+    sd_Drinks = sd(AvgDrinksPerWeek),
+    var_Drinks = var(AvgDrinksPerWeek)
+  )
+print(summary_continuous_AvgDrinksPerWeek)
+
+summary_continuous_WeeklyMinutesModerateExcercise<-hintsdataclean %>%
+  group_by(smokeStat) %>%
+  summarize(
+    min_Exercise = min(WeeklyMinutesModerateExercise),
+    max_Exercise = max(WeeklyMinutesModerateExercise),
+    Median_Exercise = median(WeeklyMinutesModerateExercise),
+    Q1_Exercise = quantile(WeeklyMinutesModerateExercise, 0.25),
+    Q3_Exercise = quantile(WeeklyMinutesModerateExercise, 0.75),
+    mean_Exercise = mean(WeeklyMinutesModerateExercise),
+    sd_Exercise = sd(WeeklyMinutesModerateExercise),
+    var_Exercise = var(WeeklyMinutesModerateExercise)
+  )
+print(summary_continuous_WeeklyMinutesModerateExcercise)
+
+summary_continuous_BMI<-hintsdataclean %>%
+  group_by(smokeStat) %>%
+  summarize(
+    min_BMI = min(BMI),
+    max_BMI = max(BMI),
+    Median_BMI = median(BMI),
+    Q1_BMI = quantile(BMI, 0.25),
+    Q3_BMI = quantile(BMI, 0.75),
+    mean_BMI = mean(BMI),
+    sd_BMI = sd(BMI),
+    var_BMI = var(BMI)
+  )
+print(summary_continuous_BMI)
+
+#B.2, part 2
+library(skimr) #the skim function shows the whole 5 number summary(median, min, max, 1st, and 3rd quartiles), as well as the standard deviation
+help(skimr) #to help understand how to get variance into the skimr function
+my_skim <- skim_with(
+  numeric = sfl(
+  mean = mean,
+  sd = sd,
+  var = var,
+  min = min,
+  quart25 = ~quantile(., 0.25),
+  median = median,
+  quartp75 = ~quantile(., 0.75),
+  max = max
+),
+append=FALSE
+)
+#the above makes a custom skimmer, as the original skimr function does not include variance
+my_skim(hintsdataclean, Age)
+my_skim(hintsdataclean, BMI)
+my_skim(hintsdataclean, WeeklyMinutesModerateExercise)
+my_skim(hintsdataclean, AvgDrinksPerWeek)
+#running each of the categorical variables above to make sure the output is right
+
+
+#Writing Functions: Write a single R function called "my_summary_func" to display the results of the statistical summaries in B.1.  (5%)
+my_summary_func<- function(x) {
+  list(
+  mean_x = mean(x), #gives the mean
+  sd_x   = sd(x), #gives the standard deviation
+  min_x  = min(x), #finds the minimum 
+  max_x  = max(x),#finds the maximum
+  median_x = median(x),
+  quantile_x = quantile(x),
+  var_x = var(x))
+}#closes the function
+my_summary_func(Age)
+my_summary_func(BMI)
+my_summary_func(WeeklyMinutesModerateExercise)
+my_summary_func(AvgDrinksPerWeek)
+
+#Display two different appropriate graphs showing the distribution of QualityCare and RaceEthn5 variables, respectively. Briefly interpret your results. (10%)
+pie_RaceEthn5 <- hintsdataclean$RaceEthn5 #selecting and plotting the race variable
+pie_raceEthn_table <- table(pie_RaceEthn5)#freq table of selected variables
+labels <- c('Non-Hispanic White', 'Non-Hispanic Black or African American', 'Hispanic', 'Non-Hispanic Asian', 'Non-Hispanic Other')#plotting the chart and adding labels, all labels are from the HINTS data codebook
+pie(pie_raceEthn_table, labels, main="HINTS Data Race and Ethnicity Pie Chart", col=rainbow(length(pie_raceEthn_table)))
+legend("topright", c('Non-Hispanic White', 'Non-Hispanic Black or African American', 'Hispanic', 'Non-Hispanic Asian', 'Non-Hispanic Other'), cex=.4, fill=rainbow(length(pie_raceEthn_table)))
+png(file="Race_and_Ethn_pie.jpg")
+#next plot
+bar_Qualitycare <- hintsdataclean$QualityCare
+bar_Qualitycare_table <- table(bar_Qualitycare)
+labels_qualitycare <- c('Excellent', 'Very Good', 'Good', 'Fair', 'Poor')#labels for the quality of care variable
+barplot(bar_Qualitycare_table, names.arg=labels_qualitycare, xlab="Quality of Care", ylab="Count", col="pink", main="Quality of Care Bar Chart", border="black") #creating a bar plot for the quality of care variable
+
+  #Display two different appropriate graphs showing the distribution of Age and BMI variables, respectively. Briefly interpret your results. (10%)
+plot(hintsdataclean$Age, main="Age Scatterplot") #scatterplot of Age
+hist(hintsdataclean$BMI, main="BMI Frequency") #histogram for BMI
+  
+#Using the ggplot2 package, repeat the visualization analysis in 4.I. and 4.II., respectively. (10%)
+library(ggplot2)#opening ggplot for the session
+
+  #Histogram for Race and Ethnicity, as Pie Chart function unavaiable in ggplot2
+ggplot(hintsdataclean, aes(x=RaceEthn5)) +
+  geom_histogram(binwidth=2, fill="blue", color="black")+
+  labs(title="Histogram of Race and Ethnicity", 
+  x = "Race and Ethnicity", 
+  y = "Count")
+
+#Bar chart for Quality of Care
+  ggplot(hintsdataclean, aes(x = QualityCare, fill = QualityCare)) + #creates a base for a bar plot with days
+  geom_bar() +    
+  labs(title = " Distribution of Quality of Care", # plot title
+  x = "Quality of Care", # x-axis label
+  y = "Frequency") + # y-axis label
+  theme_bw()
+    
+# Histogram of BMI
+ggplot(hintsdataclean, aes(x=BMI)) +
+  geom_histogram(binwidth=50, fill="blue", color="black")+
+  labs(title="Histogram of BMI", 
+  x = "BMI", 
+  y = "Count")
+
+#Scatter/boxplot Plot for Age
+ggplot(hintsdataclean, aes(x=Age, fill=Age))+
+  geom_boxplot()+
+  theme(legend.position="top")
+
+#functions for graphs, graphs of categorical data
+my_visual_func_I <- function(data, var) {
+  variable <- as.factor(data[[var]]) #convert variable to factor
+  barplot(table(variable), #for the barplot function
+  main = paste("Distribution of", var),
+  xlab = var,
+  ylab = "Frequency")
+}
+my_visual_func_I(hintsdataclean, "QualityCare") # checking output
+my_visual_func_I(hintsdataclean, "RaceEthn5")#checking output
+
+#function number 2, continuous data
+my_visual_func_II <- function(data, var) {
+  variable <- data[[var]]
+  hist(variable,
+  main = paste("Distribution of", var),
+  xlab = var,
+  ylab = "Frequency")
+}
+my_visual_func_II(hintsdataclean, "Age") #checking appropriate output
+my_visual_func_II(hintsdataclean, "BMI")#checking output
 
