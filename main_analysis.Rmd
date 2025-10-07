@@ -1,214 +1,737 @@
-#Part A
-hintsdata<-HINTSData_2020_clean #renaming the data to something more simple
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# #Part A
+
+readcsv(HINTSData_2020_clean.csv, header=TRUE)*#download data*
+
+hintsdata\<-HINTSData_2020_clean *#renaming the data to something more
+simple*
+
 summary(hintsdata)
-hintsdata
-neededvariables<-c("HHID", "PersonID", "QualityCare", "Age", "BirthGender", "smokeStat", "RaceEthn5", "AvgDrinksPerWeek", "WeeklyMinutesModerateExercise", "BMI")#selecting the variablew needed for analysis
-hintsdataclean<-hintsdata[neededvariables]#putting the needed variables into their own subset
-#Part B
-summary(hintsdataclean)
-#continuous variables in the dataset: age, AvgDrinks, exercise, & BMI
-attach(hintsdataclean)
-mean(Age) # Provides the mean of the data
-sd(Age) # Provides the standard deviation of the data
-var(Age)#Provides variance of the variable
+
+neededvariables\<-c("HHID", "PersonID", "QualityCare", "Age",
+"BirthGender", "smokeStat", "RaceEthn5", "AvgDrinksPerWeek",
+"WeeklyMinutesModerateExercise", "BMI")*#selecting the variables needed
+for analysis* hintsdataclean\<-hintsdata[neededvariables]*#putting the
+needed variables into their own subset*
+
+summary(hintsdataclean) *#checking output*
+
+#### ##OUTPUT
+
+> summary(hintsdata) HHID PersonID QualityCare HealthInsurance Age
+> BirthGender\
+> Min. :11000012 Length:2402 Min. :1.000 Min. :1.000 Min. : 18.00 Min.
+> :1.000\
+> 1st Qu.:11002591 Class :character 1st Qu.:1.000 1st Qu.:1.000 1st Qu.:
+> 43.00 1st Qu.:1.000\
+> Median :11005968 Mode :character Median :2.000 Median :1.000 Median :
+> 58.00 Median :2.000\
+> Mean :11006770 Mean :2.003 Mean :1.034 Mean : 55.59 Mean :1.585\
+> 3rd Qu.:11010856 3rd Qu.:3.000 3rd Qu.:1.000 3rd Qu.: 68.00 3rd
+> Qu.:2.000\
+> Max. :11015347 Max. :5.000 Max. :2.000 Max. :100.00 Max. :2.000\
+> FullTimeOcc_Cat MaritalStatus SexualOrientation AgeGrpB EducA
+> RaceEthn5\
+> Min. :1.000 Min. :1.000 Min. : 1.000 Min. :1.000 Min. :-9.00 Min.
+> :1.000\
+> 1st Qu.:1.000 1st Qu.:1.000 1st Qu.: 1.000 1st Qu.:2.000 1st Qu.: 3.00
+> 1st Qu.:1.000\
+> Median :2.000 Median :1.000 Median : 1.000 Median :3.000 Median : 4.00
+> Median :1.000\
+> Mean :2.974 Mean :2.556 Mean : 2.086 Mean :2.974 Mean : 3.22 Mean
+> :1.695\
+> 3rd Qu.:5.000 3rd Qu.:4.000 3rd Qu.: 1.000 3rd Qu.:4.000 3rd Qu.: 4.00
+> 3rd Qu.:2.000\
+> Max. :9.000 Max. :6.000 Max. :91.000 Max. :5.000 Max. : 4.00 Max.
+> :5.000\
+> HHInc BMI smokeStat WeeklyMinutesModerateExercise AvgDrinksPerWeek
+> Min. :1.000 Min. :10.90 Min. :1.000 Min. : 0.0 Min. : 0.000\
+> 1st Qu.:2.000 1st Qu.:24.00 1st Qu.:2.000 1st Qu.: 0.0 1st Qu.: 0.000\
+> Median :4.000 Median :27.50 Median :3.000 Median : 90.0 Median :
+> 0.000\
+> Mean :3.654 Mean :28.61 Mean :2.535 Mean : 161.8 Mean : 3.358\
+> 3rd Qu.:5.000 3rd Qu.:31.90 3rd Qu.:3.000 3rd Qu.: 210.0 3rd Qu.:
+> 4.000\
+> Max. :5.000 Max. :73.80 Max. :3.000 Max. :4620.0 Max. :70.000
+
+# #B.1
+
+*#continuous variables in the dataset: age, AvgDrinks, exercise, & BMI
+attach(hintsdataclean)*
+
+### #Age Variable 
+
+mean(Age) *\# Provides the mean of the data*
+
+sd(Age) *\# Provides the standard deviation of the data*
+
+var(Age)*#Provides variance of the variable*
+
 min(Age)
+
 median(Age)
+
 quantile(Age)
+
 max(Age)
 
+#### ##OUTPUT
+
+> mean(Age) \# Provides the mean of the data [1] 55.59117 sd(Age) \#
+> Provides the standard deviation of the data [1] 16.57902
+> var(Age)#Provides variance of the variable [1] 274.864 min(Age) [1] 18
+> median(Age) [1] 58 quantile(Age) 0% 25% 50% 75% 100% 18 43 58 68 100
+> max(Age) [1] 100
+
+### #Drinks per week variable 
+
 mean(AvgDrinksPerWeek)
+
 sd(AvgDrinksPerWeek)
+
 var(AvgDrinksPerWeek)
+
 min(AvgDrinksPerWeek)
+
 max(AvgDrinksPerWeek)
+
 median(AvgDrinksPerWeek)
+
 quantile(AvgDrinksPerWeek)
 
+### ##OUPUT
+
+> mean(AvgDrinksPerWeek) [1] 3.358035 sd(AvgDrinksPerWeek) [1] 6.588142
+> var(AvgDrinksPerWeek) [1] 43.40362 min(AvgDrinksPerWeek) [1] 0
+> max(AvgDrinksPerWeek) [1] 70 median(AvgDrinksPerWeek) [1] 0
+> quantile(AvgDrinksPerWeek) 0% 25% 50% 75% 100% 0 0 0 4 70
+
+### #Exercise Variable 
+
 mean(WeeklyMinutesModerateExercise)
+
 sd(WeeklyMinutesModerateExercise)
+
 var(WeeklyMinutesModerateExercise)
+
 min(WeeklyMinutesModerateExercise)
+
 max(WeeklyMinutesModerateExercise)
+
 median(WeeklyMinutesModerateExercise)
+
 quantile(WeeklyMinutesModerateExercise)
 
+#### ##OUTPUT
+
+> mean(WeeklyMinutesModerateExercise) [1] 161.7818
+> sd(WeeklyMinutesModerateExercise) [1] 271.1893
+> var(WeeklyMinutesModerateExercise) [1] 73543.61
+> min(WeeklyMinutesModerateExercise) [1] 0
+> max(WeeklyMinutesModerateExercise) [1] 4620
+> median(WeeklyMinutesModerateExercise) [1] 90
+> quantile(WeeklyMinutesModerateExercise) 0% 25% 50% 75% 100% 0 0 90 210
+> 4620
+
+### #BMI Variable 
+
 mean(BMI)
+
 sd(BMI)
+
 var(BMI)
+
 min(BMI)
+
 max(BMI)
+
 median(BMI)
+
 quantile(BMI)
-#B.2, Dyplr
-library(dplyr)
-help(dplyr)
-summary(Age)#gives all components of the 5 number summary(min, max, median, mean, and 1st quartile)
+
+#### ##OUTPUT
+
+> mean(BMI) [1] 28.60704 sd(BMI) [1] 6.538369 var(BMI) [1] 42.75028
+> min(BMI) [1] 10.9 max(BMI) [1] 73.8 median(BMI) [1] 27.5 quantile(BMI)
+> 0% 25% 50% 75% 100% 10.9 24.0 27.5 31.9 73.8
+
+# #B.2.1
+
+Dyplr library(dplyr) *#load dyplr*
+
+help(dplyr) *#tells me more about how to use dplyr*
+
+summary(Age) *#gives all components needed (min, max, median, mean, and
+1st quartile) EXCEPT variance*
+
 summary(AvgDrinksPerWeek)
+
 summary(WeeklyMinutesModerateExercise)
+
 summary(BMI)
-#using group_by from dyplr allows me to include what is not in the summary function for each cont. variable, while stratifying by smoking
-summary_continuous_Age<-hintsdataclean %>%
-  group_by(smokeStat) %>%
-  summarize(
-    min_Age = min(Age),
-    max_Age = max(Age),
-    Median = median(Age),
-    Q1_Age = quantile(Age, 0.25),
-    Q3_Age = quantile(Age, 0.75),
-    mean_Age = mean(Age),
-    sd_Age = sd(Age),
-    var_Age = var(Age)
-  )
+
+#### ##OUTPUT
+
+> summary(Age)*#gives all components of the 5 number summary(min, max,
+> median, mean, and 1st quartile)*
+>
+> Min. 1st Qu. Median Mean 3rd Qu. Max. 18.00 43.00 58.00 55.59 68.00
+> 100.00 summary(AvgDrinksPerWeek)
+>
+> Min. 1st Qu. Median Mean 3rd Qu. Max. 0.000 0.000 0.000 3.358 4.000
+> 70.000 summary(WeeklyMinutesModerateExercise)
+>
+> Min. 1st Qu. Median Mean 3rd Qu. Max. 0.0 0.0 90.0 161.8 210.0 4620.0
+>
+> summary(BMI)
+>
+> Min. 1st Qu. Median Mean 3rd Qu. Max. 10.90 24.00 27.50 28.61 31.90
+> 73.80
+
+*#using group_by from dyplr allows me to include what is not in the
+summary function for each cont. variable, while stratifying by smoking*
+
+### #Age 
+
+summary_continuous_Age\<-hintsdataclean %\>%
+
+group_by(smokeStat) %\>%
+
+summarize(
+
+min_Age = min(Age),
+
+max_Age = max(Age),
+
+Median = median(Age),
+
+Q1_Age = quantile(Age, 0.25),
+
+Q3_Age = quantile(Age, 0.75),
+
+mean_Age = mean(Age),
+
+sd_Age = sd(Age),
+
+var_Age = var(Age)
+
+)
+
 print(summary_continuous_Age)
 
-summary_continuous_AvgDrinksPerWeek<-hintsdataclean %>%
-  group_by(smokeStat) %>%
-  summarize(
-    min_Drinks = min(AvgDrinksPerWeek),
-    max_Drinks = max(AvgDrinksPerWeek),
-    Median_Drinks = median(AvgDrinksPerWeek),
-    Q1_Drinks = quantile(AvgDrinksPerWeek, 0.25),
-    Q3_Drinks = quantile(AvgDrinksPerWeek, 0.75),
-    mean_Drinks = mean(AvgDrinksPerWeek),
-    sd_Drinks = sd(AvgDrinksPerWeek),
-    var_Drinks = var(AvgDrinksPerWeek)
-  )
+#### ##OUTPUT
+
+A tibble: 3 × 9
+
+smokeStat min_Age max_Age Median Q1_Age Q3_Age mean_Age sd_Age var_Age
+<dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> 1 1 19 87 57 44 65
+54.5 14.5 212. 2 2 21 98 64 52 72 61.4 14.8 219. 3 3 18 100 55 39 66
+53.4 17.0 290.
+
+### #Drinks 
+
+summary_continuous_AvgDrinksPerWeek\<-hintsdataclean %\>%
+
+group_by(smokeStat) %\>%
+
+summarize(
+
+min_Drinks = min(AvgDrinksPerWeek),
+
+max_Drinks = max(AvgDrinksPerWeek),
+
+Median_Drinks = median(AvgDrinksPerWeek),
+
+Q1_Drinks = quantile(AvgDrinksPerWeek, 0.25),
+
+Q3_Drinks = quantile(AvgDrinksPerWeek, 0.75),
+
+mean_Drinks = mean(AvgDrinksPerWeek),
+
+sd_Drinks = sd(AvgDrinksPerWeek),
+
+var_Drinks = var(AvgDrinksPerWeek)
+
+)
+
 print(summary_continuous_AvgDrinksPerWeek)
 
-summary_continuous_WeeklyMinutesModerateExcercise<-hintsdataclean %>%
-  group_by(smokeStat) %>%
-  summarize(
-    min_Exercise = min(WeeklyMinutesModerateExercise),
-    max_Exercise = max(WeeklyMinutesModerateExercise),
-    Median_Exercise = median(WeeklyMinutesModerateExercise),
-    Q1_Exercise = quantile(WeeklyMinutesModerateExercise, 0.25),
-    Q3_Exercise = quantile(WeeklyMinutesModerateExercise, 0.75),
-    mean_Exercise = mean(WeeklyMinutesModerateExercise),
-    sd_Exercise = sd(WeeklyMinutesModerateExercise),
-    var_Exercise = var(WeeklyMinutesModerateExercise)
-  )
+#### ##OUTPUT
+
+> print(summary_continuous_AvgDrinksPerWeek)
+>
+> \# A tibble: 3 × 9 smokeStat min_Drinks max_Drinks Median_Drinks
+> Q1_Drinks Q3_Drinks mean_Drinks sd_Drinks var_Drinks <dbl> <dbl> <dbl>
+> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> 1 1 0 70 0 0 6 4.87 9.31 86.7 2 2
+> 0 56 1 0 6 4.41 7.78 60.5 3 3 0 63 0 0 3 2.68 5.31 28.2
+
+### #Exercise 
+
+summary_continuous_WeeklyMinutesModerateExcercise\<-hintsdataclean %\>%
+
+group_by(smokeStat) %\>%
+
+summarize(
+
+min_Exercise = min(WeeklyMinutesModerateExercise),
+
+max_Exercise = max(WeeklyMinutesModerateExercise),
+
+Median_Exercise = median(WeeklyMinutesModerateExercise),
+
+Q1_Exercise = quantile(WeeklyMinutesModerateExercise, 0.25),
+
+Q3_Exercise = quantile(WeeklyMinutesModerateExercise, 0.75),
+
+mean_Exercise = mean(WeeklyMinutesModerateExercise),
+
+sd_Exercise = sd(WeeklyMinutesModerateExercise),
+
+var_Exercise = var(WeeklyMinutesModerateExercise)
+
+)
+
 print(summary_continuous_WeeklyMinutesModerateExcercise)
 
-summary_continuous_BMI<-hintsdataclean %>%
-  group_by(smokeStat) %>%
-  summarize(
-    min_BMI = min(BMI),
-    max_BMI = max(BMI),
-    Median_BMI = median(BMI),
-    Q1_BMI = quantile(BMI, 0.25),
-    Q3_BMI = quantile(BMI, 0.75),
-    mean_BMI = mean(BMI),
-    sd_BMI = sd(BMI),
-    var_BMI = var(BMI)
-  )
+#### ##OUTPUT
+
+> print(summary_continuous_WeeklyMinutesModerateExcercise)
+>
+> \# A tibble: 3 × 9 smokeStat min_Exercise max_Exercise Median_Exercise
+> Q1_Exercise Q3_Exercise mean_Exercise sd_Exercise <dbl> <dbl> <dbl>
+> <dbl> <dbl> <dbl> <dbl> <dbl> 1 1 0 3500 60 0 180 154. 310. 2 2 0 3360
+> 90 0 210 174. 305. 3 3 0 4620 90 20 210 158. 249. \# ℹ 1 more
+> variable: var_Exercise <dbl>
+
+### #BMI 
+
+summary_continuous_BMI\<-hintsdataclean %\>%
+
+group_by(smokeStat) %\>%
+
+summarize(
+
+min_BMI = min(BMI),
+
+max_BMI = max(BMI),
+
+Median_BMI = median(BMI),
+
+Q1_BMI = quantile(BMI, 0.25),
+
+Q3_BMI = quantile(BMI, 0.75),
+
+mean_BMI = mean(BMI),
+
+sd_BMI = sd(BMI),
+
+var_BMI = var(BMI)
+
+)
+
 print(summary_continuous_BMI)
 
-#B.2, part 2
-library(skimr) #the skim function shows the whole 5 number summary(median, min, max, 1st, and 3rd quartiles), as well as the standard deviation
-help(skimr) #to help understand how to get variance into the skimr function
-my_skim <- skim_with(
-  numeric = sfl(
-  mean = mean,
-  sd = sd,
-  var = var,
-  min = min,
-  quart25 = ~quantile(., 0.25),
-  median = median,
-  quartp75 = ~quantile(., 0.75),
-  max = max
-),
-append=FALSE
-)
-#the above makes a custom skimmer, as the original skimr function does not include variance
+#### ##OUTPUT
+
+> print(summary_continuous_BMI)
+>
+> \# A tibble: 3 × 9 smokeStat min_BMI max_BMI Median_BMI Q1_BMI Q3_BMI
+> mean_BMI sd_BMI var_BMI <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+> <dbl> <dbl> 1 1 15.1 58.7 27.6 23.9 33.3 28.7 6.60 43.6 2 2 13.8 56.7
+> 27.8 24.2 32.1 28.8 6.34 40.2 3 3 10.9 73.8 27.5 23.8 31.6 28.5 6.61
+> 43.7
+
+#### #Interpretation
+
+-   The output for B.1 indicates that the average age of the data set is
+    about 56 years. Participants generally reported positive experiences
+    with their quality of care, with most ratings between "very good”
+    and “good.” Most participants seemed to range from nonsmokers to
+    former smokers and reported low alcohol consumption, with many
+    indicating no drinks per week. On average, participants engaged in
+    moderate physical activity for around162 minutes per week, though
+    there are participants who reported very high and low levels of
+    exercise. The mean BMI was 28.6.
+
+# #B.2.2
+
+library(skimr) *#the skim function shows the whole 5 number
+summary(median, min, max, 1st, and 3rd quartiles), as well as the
+standard deviation*
+
+help(skimr) *#to help understand how to get variance into the skimr
+function*
+
+my_skim \<- skim_with( numeric = sfl( mean = mean, sd = sd, var = var,
+min = min, quart25 = \~quantile(., 0.25), median = median, quartp75 =
+\~quantile(., 0.75), max = max ), append=FALSE )
+
+*#the above makes a custom skimmer, as the original skimr function does
+not include variance*
+
 my_skim(hintsdataclean, Age)
+
 my_skim(hintsdataclean, BMI)
+
 my_skim(hintsdataclean, WeeklyMinutesModerateExercise)
-my_skim(hintsdataclean, AvgDrinksPerWeek)
-#running each of the categorical variables above to make sure the output is right
 
+my_skim(hintsdataclean, AvgDrinksPerWeek) *#running each of the
+categorical variables above to make sure the output is right*
 
-#Writing Functions: Write a single R function called "my_summary_func" to display the results of the statistical summaries in B.1.  (5%)
-my_summary_func<- function(x) {
-  list(
-  mean_x = mean(x), #gives the mean
-  sd_x   = sd(x), #gives the standard deviation
-  min_x  = min(x), #finds the minimum 
-  max_x  = max(x),#finds the maximum
-  median_x = median(x),
-  quantile_x = quantile(x),
-  var_x = var(x))
-}#closes the function
-my_summary_func(Age)
-my_summary_func(BMI)
+#### ##OUTPUT
+
+> my_skim(hintsdataclean, Age) ── Data Summary ────────────────────────
+> Values\
+> Name hintsdataclean Number of rows 2402\
+> Number of columns 10\
+> \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+> Column type frequency:\
+> numeric 1\
+> \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+> Group variables None
+
+── Variable type: numeric
+───────────────────────────────────────────────────────────────────────────────
+skim_variable n_missing complete_rate mean sd var min quart25 median
+quartp75 max 1 Age 0 1 55.6 16.6 275. 18 43 58 68 100 \>
+my_skim(hintsdataclean, BMI) ── Data Summary ────────────────────────
+Values\
+Name hintsdataclean Number of rows 2402\
+Number of columns 10\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+Column type frequency:\
+numeric 1\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+Group variables None
+
+── Variable type: numeric
+───────────────────────────────────────────────────────────────────────────────
+skim_variable n_missing complete_rate mean sd var min quart25 median
+quartp75 max 1 BMI 0 1 28.6 6.54 42.8 10.9 24 27.5 31.9 73.8 \>
+my_skim(hintsdataclean, WeeklyMinutesModerateExercise) ── Data Summary
+──────────────────────── Values\
+Name hintsdataclean Number of rows 2402\
+Number of columns 10\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+Column type frequency:\
+numeric 1\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+Group variables None
+
+── Variable type: numeric
+───────────────────────────────────────────────────────────────────────────────
+skim_variable n_missing complete_rate mean sd var min quart25 median
+quartp75 max 1 WeeklyMinutesModerateExercise 0 1 162. 271. 73544. 0 0 90
+210 4620 \> my_skim(hintsdataclean, AvgDrinksPerWeek) ── Data Summary
+──────────────────────── Values\
+Name hintsdataclean Number of rows 2402\
+Number of columns 10\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+Column type frequency:\
+numeric 1\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
+Group variables None
+
+── Variable type: numeric
+───────────────────────────────────────────────────────────────────────────────
+skim_variable n_missing complete_rate mean sd var min quart25 median
+quartp75 max 1 AvgDrinksPerWeek 0 1 3.36 6.59 43.4 0 0 0 4 70
+
+#### #interpretation
+
+-   Based on this analysis, former smokers are older on average compared
+    to current smokers. Alcohol consumption is generally low across all
+    groups, and there does not seem to be a major difference in physical
+    activity or BMI when stratified by smoking status. These results
+    suggest that while age differs by smoking category, other health
+    variables remain relatively consistent in these participants.
+
+# #B.3
+
+my_summary_func\<- function(x) { list( mean_x = mean(x), *#gives the
+mean*
+
+sd_x = sd(x), *#gives the standard deviation*
+
+min_x = min(x), *#finds the minimum*
+
+max_x = max(x),*#finds the maximum*
+
+median_x = median(x),
+
+quantile_x = quantile(x),
+
+var_x = var(x))
+
+}*#closes the function*
+
+my_summary_func(Age) my_summary_func(BMI)
+
 my_summary_func(WeeklyMinutesModerateExercise)
+
 my_summary_func(AvgDrinksPerWeek)
 
-#Display two different appropriate graphs showing the distribution of QualityCare and RaceEthn5 variables, respectively. Briefly interpret your results. (10%)
-pie_RaceEthn5 <- hintsdataclean$RaceEthn5 #selecting and plotting the race variable
-pie_raceEthn_table <- table(pie_RaceEthn5)#freq table of selected variables
-labels <- c('Non-Hispanic White', 'Non-Hispanic Black or African American', 'Hispanic', 'Non-Hispanic Asian', 'Non-Hispanic Other')#plotting the chart and adding labels, all labels are from the HINTS data codebook
-pie(pie_raceEthn_table, labels, main="HINTS Data Race and Ethnicity Pie Chart", col=rainbow(length(pie_raceEthn_table)))
-legend("topright", c('Non-Hispanic White', 'Non-Hispanic Black or African American', 'Hispanic', 'Non-Hispanic Asian', 'Non-Hispanic Other'), cex=.4, fill=rainbow(length(pie_raceEthn_table)))
-png(file="Race_and_Ethn_pie.jpg")
-#next plot
-bar_Qualitycare <- hintsdataclean$QualityCare
-bar_Qualitycare_table <- table(bar_Qualitycare)
-labels_qualitycare <- c('Excellent', 'Very Good', 'Good', 'Fair', 'Poor')#labels for the quality of care variable
-barplot(bar_Qualitycare_table, names.arg=labels_qualitycare, xlab="Quality of Care", ylab="Count", col="pink", main="Quality of Care Bar Chart", border="black") #creating a bar plot for the quality of care variable
+#### ##OUTPUT
 
-  #Display two different appropriate graphs showing the distribution of Age and BMI variables, respectively. Briefly interpret your results. (10%)
-plot(hintsdataclean$Age, main="Age Scatterplot") #scatterplot of Age
-hist(hintsdataclean$BMI, main="BMI Frequency") #histogram for BMI
-  
-#Using the ggplot2 package, repeat the visualization analysis in 4.I. and 4.II., respectively. (10%)
-library(ggplot2)#opening ggplot for the session
+> my_summary_func(Age)
+>
+> \$mean_x [1] 55.59117
 
-  #Histogram for Race and Ethnicity, as Pie Chart function unavaiable in ggplot2
-ggplot(hintsdataclean, aes(x=RaceEthn5)) +
-  geom_histogram(binwidth=2, fill="blue", color="black")+
-  labs(title="Histogram of Race and Ethnicity", 
-  x = "Race and Ethnicity", 
-  y = "Count")
+\$sd_x [1] 16.57902
 
-#Bar chart for Quality of Care
-  ggplot(hintsdataclean, aes(x = QualityCare, fill = QualityCare)) + #creates a base for a bar plot with days
-  geom_bar() +    
-  labs(title = " Distribution of Quality of Care", # plot title
-  x = "Quality of Care", # x-axis label
-  y = "Frequency") + # y-axis label
-  theme_bw()
-    
-# Histogram of BMI
+\$min_x [1] 18
+
+\$max_x [1] 100
+
+\$median_x [1] 58
+
+\$quantile_x 0% 25% 50% 75% 100% 18 43 58 68 100
+
+\$var_x [1] 274.864
+
+> my_summary_func(BMI)
+>
+> \$mean_x [1] 28.60704
+
+\$sd_x [1] 6.538369
+
+\$min_x [1] 10.9
+
+\$max_x [1] 73.8
+
+\$median_x [1] 27.5
+
+\$quantile_x 0% 25% 50% 75% 100% 10.9 24.0 27.5 31.9 73.8
+
+\$var_x [1] 42.75028
+
+> my_summary_func(WeeklyMinutesModerateExercise)
+>
+> \$mean_x [1] 161.7818
+
+\$sd_x [1] 271.1893
+
+\$min_x [1] 0
+
+\$max_x [1] 4620
+
+\$median_x [1] 90
+
+\$quantile_x 0% 25% 50% 75% 100% 0 0 90 210 4620
+
+\$var_x [1] 73543.61
+
+> my_summary_func(AvgDrinksPerWeek)
+>
+> \$mean_x [1] 3.358035
+
+\$sd_x [1] 6.588142
+
+\$min_x [1] 0
+
+\$max_x [1] 70
+
+\$median_x [1] 0
+
+\$quantile_x 0% 25% 50% 75% 100% 0 0 0 4 70
+
+\$var_x [1] 43.40362
+
+# #B.4.1
+
+### #Pie Chart for Race and Ethnicity
+
+pie_RaceEthn5 \<- hintsdataclean\$RaceEthn5 *#selecting and plotting the
+race variable*
+
+pie_raceEthn_table \<- table(pie_RaceEthn5)*#freq table of selected
+variables*
+
+labels \<- c('Non-Hispanic White', 'Non-Hispanic Black or African
+American', 'Hispanic', 'Non-Hispanic Asian', 'Non-Hispanic
+Other')*#plotting the chart and adding labels, all labels are from the
+HINTS data codebook*
+
+pie(pie_raceEthn_table, labels, main="HINTS Data Race and Ethnicity Pie
+Chart", col=rainbow(length(pie_raceEthn_table))) legend("topright",
+c('Non-Hispanic White', 'Non-Hispanic Black or African American',
+'Hispanic', 'Non-Hispanic Asian', 'Non-Hispanic Other'), cex=.4,
+fill=rainbow(length(pie_raceEthn_table)))
+
+#### ##OUTPUT
+
+![](images/clipboard-1847794.png){width="345"}
+
+#### #Interpretation
+
+-   The pie chart for race and ethnicity shows that the predominant
+    group seems to be non-hispanic white individuals, followed by
+    Hispanic black or African American and Hispanic where around the
+    same amount of the participants fall. The final group is Non
+    hispanic other and non hispanic Asian which are the 2 lowest
+    categories of race and ethincity.
+
+### #Bar Plot of Quality of Care
+
+bar_Qualitycare \<- hintsdataclean\$QualityCare bar_Qualitycare_table
+\<- table(bar_Qualitycare) labels_qualitycare \<- c('Excellent', 'Very
+Good', 'Good', 'Fair', 'Poor')*#labels for the quality of care variable*
+barplot(bar_Qualitycare_table, names.arg=labels_qualitycare,
+xlab="Quality of Care", ylab="Count", col="pink", main="Quality of Care
+Bar Chart", border="black") *#creating a bar plot for the quality of
+care variable*
+
+#### ##OUTPUT
+
+![](images/clipboard-642571894.png){width="381"}
+
+#### #Interpretation
+
+-   This bar chart shows that most participants fell into the excellent
+    and very good groups for quality of care, indicating that most
+    participants may have been satisfied with their quality of care.
+
+# #B.4.2.
+
+### #scatterplot of Age
+
+plot(hintsdataclean\$Age, main="Age Scatterplot")
+
+#### ##OUTPUT
+
+![](images/clipboard-3600353257.png){width="526"}
+
+#### #Interpretation
+
+-   This scatter plot would indicate that there *may* be a trend around
+    the age of 60, meaning that more participants may be between 40 and
+    70.
+
+### 
+#Histogram of BMI
+
+hist(hintsdataclean\$BMI, main="BMI Frequency") #histogram for BMI
+
+#### ##OUTPUT
+
+![](images/clipboard-2738900889.png){width="508"}
+
+### #Interpretation
+
+-   This histogram indicates that most participants had a BMI from 20 to
+    35, indicating that most participants may be normal to overweight.
+
+# #B.4.3
+
+library(ggplot2)*#opening ggplot for the session #Histogram for Race and
+Ethnicity, as Pie Chart function unavailable in ggplot2*
+
+### #Histogram Race and Ethnicity with GGplot
+
+ggplot(hintsdataclean, aes(x=RaceEthn5)) + geom_histogram(binwidth=2,
+fill="blue", color="black")+ labs(title="Histogram of Race and
+Ethnicity", x = "Race and Ethnicity", y = "Count")
+
+#### ##OUTPUT
+
+![](images/clipboard-1565558469.png){width="413"}
+
+### #Bar chart for Quality of Care with GGplot
+
+ggplot(hintsdataclean, aes(x = QualityCare, fill = QualityCare)) +
+*#creates a base for a bar plot with days* geom_bar() +\
+labs(title = " Distribution of Quality of Care", *\# plot title*
+
+x = "Quality of Care", *\# x-axis label*
+
+y = "Frequency") + *\# y-axis*
+
+label theme_bw()
+
+#### ##OUTPUT
+
+![](images/clipboard-959402477.png){width="417"}
+
+### #Histogram of BMI
+
 ggplot(hintsdataclean, aes(x=BMI)) +
-  geom_histogram(binwidth=50, fill="blue", color="black")+
-  labs(title="Histogram of BMI", 
-  x = "BMI", 
-  y = "Count")
 
-#Scatter/boxplot Plot for Age
+geom_histogram(binwidth=50, fill="blue", color="black")+
+
+labs(title="Histogram of BMI",
+
+x = "BMI",
+
+y = "Count")
+
+#### #OUTPUT
+
+![](images/clipboard-957270140.png){width="359"}
+
+### #Scatter/boxplot Plot for Age 
+
 ggplot(hintsdataclean, aes(x=Age, fill=Age))+
-  geom_boxplot()+
-  theme(legend.position="top")
 
-#functions for graphs, graphs of categorical data
-my_visual_func_I <- function(data, var) {
-  variable <- as.factor(data[[var]]) #convert variable to factor
-  barplot(table(variable), #for the barplot function
-  main = paste("Distribution of", var),
-  xlab = var,
-  ylab = "Frequency")
+geom_boxplot()+
+
+theme(legend.position="top")
+
+#### ##OUTPUT
+
+![](images/clipboard-101083415.png){width="414"}
+
+# #B.4.4
+
+my_visual_func_I \<- function(data, var) {
+
+variable \<- as.factor(data[[var]]) *#convert variable to factor*
+barplot(table(variable), #for the barplot function main =
+paste("Distribution of", var),
+
+xlab = var,
+
+ylab = "Frequency")
+
 }
-my_visual_func_I(hintsdataclean, "QualityCare") # checking output
+
+my_visual_func_I(hintsdataclean, "QualityCare") *#checking output*
+
+#### ##OUTPUT
+
+![](images/clipboard-136054827.png){width="375"}
+
 my_visual_func_I(hintsdataclean, "RaceEthn5")#checking output
 
-#function number 2, continuous data
-my_visual_func_II <- function(data, var) {
-  variable <- data[[var]]
-  hist(variable,
-  main = paste("Distribution of", var),
-  xlab = var,
-  ylab = "Frequency")
-}
-my_visual_func_II(hintsdataclean, "Age") #checking appropriate output
-my_visual_func_II(hintsdataclean, "BMI")#checking output
+#### ##OUTPUT
 
+![](images/clipboard-876455334.png){width="360"}
+
+### #function number 2, continuous data 
+
+my_visual_func_II \<- function(data, var) {
+
+variable \<- data[[var]] hist(variable, main = paste("Distribution of",
+var),
+
+xlab = var,
+
+ylab = "Frequency")
+
+}
+
+my_visual_func_II(hintsdataclean, "Age") *#checking appropriate output*
+
+#### ##OUTPUT
+
+![](images/clipboard-672721352.png){width="441"}
+
+my_visual_func_II(hintsdataclean, "BMI")*#checking output*
+
+#### ##OUTPUT
+
+![](images/clipboard-1510712065.png){width="482"}
