@@ -24,7 +24,7 @@ Error in readcsv(HINTSData_2020_clean.csv, header = TRUE) :
   could not find function "readcsv"
 > #Part A
 > setwd("HINTSData_2020_clean") #HINTS data was downloaded, imported into R, and set as the working directory for this script
-Error in setwd("HINTSData_2020_clean") : cannot change working directory
+Error in setwd("HINTSData_2020_clean") : cannot change working directory ##these errors were happening because all of this has been previously ran
 > hintsdata<-HINTSData_2020_clean #renaming the data to something more simple
 > summary(hintsdata)
       HHID            PersonID          QualityCare    HealthInsurance      Age          BirthGender   
@@ -48,7 +48,7 @@ Error in setwd("HINTSData_2020_clean") : cannot change working directory
  Mean   :3.654   Mean   :28.61   Mean   :2.535   Mean   : 161.8                Mean   : 3.358  
  3rd Qu.:5.000   3rd Qu.:31.90   3rd Qu.:3.000   3rd Qu.: 210.0                3rd Qu.: 4.000  
  Max.   :5.000   Max.   :73.80   Max.   :3.000   Max.   :4620.0                Max.   :70.000  
-> hintsdata
+> hintsdata #I was looking at the data set before starting analysis
 # A tibble: 2,402 × 17
        HHID PersonID    QualityCare HealthInsurance   Age BirthGender FullTimeOcc_Cat MaritalStatus
       <dbl> <chr>             <dbl>           <dbl> <dbl>       <dbl>           <dbl>         <dbl>
@@ -66,7 +66,7 @@ Error in setwd("HINTSData_2020_clean") : cannot change working directory
 # ℹ 9 more variables: SexualOrientation <dbl>, AgeGrpB <dbl>, EducA <dbl>, RaceEthn5 <dbl>, HHInc <dbl>,
 #   BMI <dbl>, smokeStat <dbl>, WeeklyMinutesModerateExercise <dbl>, AvgDrinksPerWeek <dbl>
 # ℹ Use `print(n = ...)` to see more rows
-> hintsdata<-hintsdata-c()
+> hintsdata<-hintsdata-c() #this was left over code from figuring out how to select certain variables, led to an error as it is incomplete
 Error in FUN(left, right) : non-numeric argument to binary operator
 > neededvariables<-c("HHID", "PersonID", "QualityCare", "Age", "BirthGender", "smokeStat", "RaceEthn5", "AvgDrinksPerWeek", "WeeklyMinutesModerateExercise", "BMI")#selecting the variablew needed for analysis
 > hintsdataclean<-hintsdata[neededvariables]#putting the needed variables into their own subset
@@ -86,11 +86,11 @@ Error in FUN(left, right) : non-numeric argument to binary operator
  Mean   :1.695   Mean   : 3.358   Mean   : 161.8                Mean   :28.61  
  3rd Qu.:2.000   3rd Qu.: 4.000   3rd Qu.: 210.0                3rd Qu.:31.90  
  Max.   :5.000   Max.   :70.000   Max.   :4620.0                Max.   :73.80  
-> #continuous variables in the dataset: age, AvgDrinks, exercise, & BMI
+> #continuous variables in the dataset: age, AvgDrinks, exercise, & BMI #not code, is a note for self
 > attach(hintsdataclean)
-> mean(Age) # Provides the mean of the data
+> mean(Age) # Provides the mean of the data for different variables
 [1] 55.59117
-> sd(Age) # Provides the standard deviation of the data
+> sd(Age) # Provides the standard deviation of the data for diff. variables
 [1] 16.57902
 > var(Age)#Provides variance of the variable
 [1] 274.864
@@ -134,13 +134,13 @@ Error in FUN(left, right) : non-numeric argument to binary operator
 [1] 90
 > quanitle(WeeklyMinutesModerateExercise)
 Error in quanitle(WeeklyMinutesModerateExercise) : 
-  could not find function "quanitle"
+  could not find function "quanitle" 
 > quaritle(WeeklyMinutesModerateExercise)
 Error in quaritle(WeeklyMinutesModerateExercise) : 
   could not find function "quaritle"
 > quanitle(WeeklyMinutesModerateExercise)
 Error in quanitle(WeeklyMinutesModerateExercise) : 
-  could not find function "quanitle"
+  could not find function "quanitle" #this error kept occuring because I was supposed to use quantile instead
 > quantile(WeeklyMinutesModerateExercise)
   0%  25%  50%  75% 100% 
    0    0   90  210 4620 
@@ -172,7 +172,7 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
-> help(dplyr)
+> help(dplyr) #needed to understand how to add all needed stats. summaries to a dplyr function
 > summary(Age)#gives all components of the 5 number summary(min, max, median, mean, and 1st quartile)
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   18.00   43.00   58.00   55.59   68.00  100.00 
@@ -194,7 +194,7 @@ Error in UseMethod("group_by") :
 > group_by(smokeStat) %>%
 +   summary(Age)
 Error in UseMethod("group_by") : 
-  no applicable method for 'group_by' applied to an object of class "c('double', 'numeric')"
+  no applicable method for 'group_by' applied to an object of class "c('double', 'numeric')" #this error kept occuring because I was not running it right, as in I had the improper thing highlighted
 > #B.2, Dyplr
 > library(dplyr)
 > help(dplyr)
@@ -488,9 +488,10 @@ $var_x
 +   labs(title="Histogram of BMI", 
 +   x = "BMI", 
 +   y = "Count")
-Error in ggplot(hintsdataclean, aes(x = BMI)) : 
+### I ran these before the plots because running the pie chart, and sometimes the bar, kept making my RStudio stop working
+Error in ggplot(hintsdataclean, aes(x = BMI)) : #forgot to load ggplot
   could not find function "ggplot"
->   #Using the ggplot2 package, repeat the visualization analysis in 4.I. and 4.II., respectively. (10%)
+>   #Using the ggplot2 package, repeat the visualization analysis in 4.I. and 4.II., respectively. (10%) (note for self)
 > library(ggplot2)#opening ggplot for the session
 > # Histogram of BMI
 > ggplot(hintsdataclean, aes(x=BMI)) +
